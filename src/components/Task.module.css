@@ -20,14 +20,26 @@
     color: var(--gray-300);
     margin-right: 10px;
 } 
-
-.checkbox{
-    content:"";
-    margin-left: 3px;
-    background: #aaaa; 
-    border-radius: 100%;
-    position: relative;
+.contentList > div {
+    display: flex;
+    align-items: center;
+    justify-content: left;
 }
+
+
+.checkbox {
+    display: flex;
+    align-items: left;    
+    border: 2px solid var(--purple); 
+    width: 15px; 
+    height: 15px; 
+    border-radius: 50%;
+}
+
+.checkbox > input[type=checkbox] {
+display: none;
+}
+
 .contentList div label {
     margin-left: 8px;
 }
