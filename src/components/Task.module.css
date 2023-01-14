@@ -1,0 +1,33 @@
+.contentList {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 678px;
+    height: 50px;
+    border-radius: 4px;
+    padding: 3px;      
+    background: var(--gray-400);
+    color: var(--gray-100);
+    font-size: 12px;
+}
+
+.contentList + .contentList{
+    margin-top: 0.5rem;
+}
+
+.contentList > svg {
+    color: var(--gray-300);
+    margin-right: 10px;
+} 
+
+.checkbox{
+    content:"";
+    margin-left: 3px;
+    background: #aaaa; 
+    border-radius: 100%;
+    position: relative;
+}
+.contentList div label {
+    margin-left: 8px;
+}
