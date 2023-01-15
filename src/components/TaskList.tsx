@@ -15,13 +15,14 @@ export interface TaskProps {
 export function TaskList() {
 
     const [tasks, setTasks] = useState<TaskProps[]>([]);
-    const [newTaskTitle, setNewTaskTitle] = useState('');
+    const [newTaskTitle, setNewTaskTitle] = useState('');  
 
+    /**     
+     * Cria uma nova tarefa
+     */
     function handleCreateNewTask(event: FormEvent) {
 
         event.preventDefault()
-
-
 
         if (newTaskTitle) {
 
@@ -35,22 +36,60 @@ export function TaskList() {
             setNewTaskTitle('');
 
         }
-
-
-        // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
     }
 
-    function deleteTask(id:string){
-        const taskWithoutDeleteOne = tasks.filter( task => {
+
+    /**          
+     * Deleta uma tarefa recebendo id como paramentro
+     */
+    function deleteTask(id: string) {
+        const taskWithoutDeleteOne = tasks.filter(task => {
             return task.id !== id
 
         })
         setTasks(taskWithoutDeleteOne)
-        console.log(id)
+
     }
 
+    /**
+     * Atualiza a variavel isComplente quando o checkbox for clicado 
+     */
+    function completedTask(id: string) {
+        const editTask = tasks.map(task => {
+            if (task.id === id) {
+                return {
+                    ...task,
+                    isComplete: !task.isComplete
+                }
+            }
+            return task
+
+        })
+        setTasks(editTask)
+
+    }
+
+    /**
+     * Retorna a quantidade de tarefas filtradas.     
+     */
+    const compited = tasks.filter(task => {
+        const cont = task.isComplete === true
+        return cont
+    }
+    ).length
+
+
+    /**
+     * Calcula o total de tarefas criadas.
+     */
     const totalTasks = tasks.length
-    const concluidas = ` 2 de ${totalTasks}`
+
+    /**
+     * constroe messagem de tarefas conclidas.
+     */
+    const concluidas = ` ${compited} de ${totalTasks}`
+
+
 
 
     return (
@@ -101,9 +140,9 @@ export function TaskList() {
                             return (
                                 <Task
                                     onDeleteTask={deleteTask}
+                                    onCompletedTask={completedTask}
                                     key={itens.id}
-                                    content={itens}                   
-
+                                    content={itens}
                                 />
                             )
                         })}
