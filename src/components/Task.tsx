@@ -1,9 +1,24 @@
 
 import { PlusCircle, Trash } from 'phosphor-react'
 import styles from './Task.module.css'
+import { TaskProps } from './TaskList'
 
-export function Task() {
 
+
+export interface ContentProps {
+    content:TaskProps
+    onDeleteTask:(id:string)=>void
+}
+
+
+
+export function Task({content, onDeleteTask}: ContentProps) {
+
+    function handleDeleteTask(){    
+        onDeleteTask(content.id)
+    }
+
+   
 
     return (
         <li className={styles.contentList}>
@@ -11,11 +26,11 @@ export function Task() {
                 <label className={styles.checkbox}>
                     <input type="checkbox" />
                 </label>
-                <label>Minha primeira tarefa e fazer essa pagina funcionar</label>
-            </div>
-            <Trash />
-
-
+                <label>{content.title}</label>
+            </div>          
+            <Trash
+            onClick={handleDeleteTask}
+            />          
         </li>
     )
 
